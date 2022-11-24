@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Retro';
+  src: url('./resources/Retrolight.otf') format('OpenType');
+}
+
+body{
+  background-image: linear-gradient(rgb(0, 174, 255),transparent);
+
+}
+
+
+.Entrybackgroundcolor{
+  background-color: rgb(15, 15, 15);
+  color:white
+  
+}
+
+
+
+.font-retro
+{
+  font-family:'Retro';
+}
