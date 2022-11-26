@@ -15,11 +15,7 @@ export default function EntryPage() {
 
   return (
     <motion.div
-      className="
-        flex flex-col justify-center items-center
-        w-full h-[100vh]
-        Entrybackgroundcolor
-        overflow-hidden"
+      className="Entry-Page"
 
         initial={{opacity:0}}
         animate={{opacity:1}}

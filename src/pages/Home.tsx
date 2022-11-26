@@ -1,16 +1,24 @@
 import React from 'react'
-
+import AdminMenuOptions from '../components/MenuOptionsCard';
+import NavUser from '../components/NavUser';
 
 
 
 function Home() {
   return (
-    <div className='h-[100vh]'>
-
-        
+    <>
+    <NavUser/>
+    <div className='h-[95vh]
+    flex
+    justify-center
+    items-center 
+    space-x-40'>
+      
+      <AdminMenuOptions/>        
 
 
     </div>
+    </>
   )
 
 

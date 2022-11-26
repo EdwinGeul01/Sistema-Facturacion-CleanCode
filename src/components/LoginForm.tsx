@@ -24,7 +24,7 @@ export default function LoginForm() {
   return (
     <div
       className="
-                h-[50%]
+                h-[500px]
                 w-[90%] md:w-[50%] lg:w-[25%]
                 bg-[#ffffff]
                 rounded-md
