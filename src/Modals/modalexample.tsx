@@ -14,11 +14,18 @@ export default function ModalExample(props:{show:boolean , onclose:VoidFunction}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box className="h-52  bg-red-50">
-          <h2 id="parent-modal-title">Text in a modal</h2>
-          <p id="parent-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
+        <Box className="h-[100%] flex  justify-center items-center ">
+            <div className="w-[80%] h-[80%] bg-white">
+                <div>
+                    <form action="" className="pl-4 text-slate-500">
+                        <p>Nombre del producto</p>
+                        <input type="text" placeholder="Nombre del producto" className="border p-2" />
+
+
+                    </form>
+                </div>
+
+            </div>
         </Box>
       </Modal>
   );
