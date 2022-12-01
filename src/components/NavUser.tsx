@@ -1,11 +1,10 @@
 import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import LogOutButton from './Buttons/LogOutButton';
 
 export default function NavUser() {
   return (
-    <div className='h-[8vh] bg-white w-[100vw] flex justify-center items-center '>
+    <div className='h-[8vh] bg-white w-[100]  flex justify-center items-center '>
 
       <div className='w-[80%] flex flex-row items-center'>
       <AccountCircleIcon
@@ -18,12 +17,7 @@ export default function NavUser() {
       className='text-slate-500 mx-5'>USUARIO</span>
       </div>
       
-      <button className='border h-[70%] border-red-300 text-red-400  rounded-md px-5
-                         hover:bg-red-400 hover:text-white duration-300'>
-        Cerrar Sesion
-        <ExitToAppIcon
-         className='ml-3'/>
-      </button>
+      <LogOutButton />
 
 
     </div>

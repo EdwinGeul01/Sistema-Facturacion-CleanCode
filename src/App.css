@@ -57,6 +57,14 @@ body{
   }
 
 
+  .DivItemNotSelect
+  {
+    @apply bg-slate-500 mt-1 py-5 px-4 flex justify-between
+  }
 
+  .DivItemSelect
+  {
+    @apply bg-slate-300 mt-1 py-5 px-4 flex justify-between
+  }
   
 }
