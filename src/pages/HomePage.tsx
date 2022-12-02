@@ -1,9 +1,8 @@
 import React from 'react'
-import AdminMenuOptions from '../components/MenuOptionsCard';
+import AdminMenuOptionsButtons from '../components/Buttons/MenuOptionsButtons';
 import NavUser from '../components/NavUser';
 import {motion} from 'framer-motion';
 import { BrowserRouter, Routes,Route, useLocation } from 'react-router-dom';
-import AddProductPage from './AddProductPage';
 
 import SalePage from './SalePage';
 
@@ -34,8 +33,8 @@ const Location = useLocation();
 
       <Routes location={location}>
 
-        <Route path='/*' element={<AdminMenuOptions/>}/>
-        <Route path='sale' element={<SalePage/>}/>
+        <Route path='/*' element={<AdminMenuOptionsButtons/>}/>
+        <Route path='sale/*' element={<SalePage/>}/>
 
 
       </Routes>          

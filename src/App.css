@@ -45,7 +45,7 @@ body{
 
 
   .btn-menu {
-    @apply w-[15%] h-[30%]    OptionCard;
+    @apply sm:w-[15%] h-[30%] OptionCard mt-4 sm:mt-0 w-[80%] ;
   }
 
 
@@ -59,7 +59,7 @@ body{
 
   .DivItemNotSelect
   {
-    @apply bg-slate-500 mt-1 py-5 px-4 flex justify-between
+    @apply bg-slate-500 mt-1 py-5   
   }
 
   .DivItemSelect

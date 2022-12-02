@@ -1,6 +1,6 @@
 
 import React from 'react'
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/Forms/LoginForm'
 import { motion } from 'framer-motion'
 
 export default function Login() {

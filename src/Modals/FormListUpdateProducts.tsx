@@ -16,6 +16,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function ModalListUpdateProducts() {
     
+    interface IProduct
+    {
+        ID: number;
+        nombreProducto: string;
+        PrecioProducto: number;
+        CantidadDisponible: number;
+    }
+
+
+
 
     const RedirectToUrl  = useNavigate(); 
 
@@ -23,10 +33,27 @@ export default function ModalListUpdateProducts() {
     const [Error, setError] = useState(false)
 
 
+
+    function UpdateValues(productToUpdate:IProduct)
+    {
+        Data.map((p) =>
+        {
+            if(p.ID == productToUpdate.ID)
+            {
+                p.PrecioProducto = productToUpdate.PrecioProducto;
+                p.CantidadDisponible = productToUpdate.CantidadDisponible;
+            }
+
+
+        })
+
+
+    }
+
     const ListOfProducts = Data.map((i)=>
     {
 
-    const [ProducToUpdate, setProductToUpdate] = useState(i);
+    const [ProducToUpdate, setProductToUpdate] = useState<IProduct>(i);
 
     const HandleChanges =(event:ChangeEvent<HTMLInputElement>)=>
     {
@@ -35,12 +62,11 @@ export default function ModalListUpdateProducts() {
     }
 
 
+
     const UpdateProduct = () =>{
 
-        
+        UpdateValues(ProducToUpdate);
         setSuccess(true);
-        
-
         setTimeout(()=>{
             setSuccess(false);
         },1500);
@@ -49,22 +75,23 @@ export default function ModalListUpdateProducts() {
     }
 
     return(
-        <tr  key={ProducToUpdate.ID} className="DivItemNotSelect w-full">
-           <td>
+        <div  key={ProducToUpdate.ID} className="DivItemNotSelect w-full flex flex-nowrap px-4">
+           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto ">
             <p>{ProducToUpdate.nombreProducto}</p>
-           </td>
-           <td>
+           </div>
+           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
             <input type="number" value={ProducToUpdate.PrecioProducto} className=" text-center bg-transparent border-b outline-none" name="PrecioProducto" onChange={(e)=>{HandleChanges(e)}}/>
-           </td>
-           <td>
+           </div>
+           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
            <input type="number"  value={ProducToUpdate.CantidadDisponible} className=" text-center bg-transparent border-b outline-none" name="CantidadDisponible" onChange={(e)=>{HandleChanges(e)}}/>
-           </td>
-           <td>
+           </div>
+
+           <div className="w-[25%]  text-center flex justify-center items-center overflow-auto">
             <button className="border border-yellow-400 text-yellow-400 p-2 px-4 rounded-md hover:bg-yellow-500 hover:text-white duration-500" onClick={()=>{UpdateProduct()}}>Editar Producto</button>
-           </td>
+           </div>
 
 
-        </tr>
+        </div>
     
     )
 
@@ -80,7 +107,7 @@ export default function ModalListUpdateProducts() {
         <Box className="h-[100vh] flex justify-center items-center">
             
                 <div className="w-[90%] h-[80%] bg-white overflow-auto ">
-                <div className="w-full flex">
+                <div className="w-full flex sticky top-0">
                 <button className="ml-auto" onClick={()=>{ RedirectToUrl(-1); }} >
                   <DisabledByDefaultIcon
                   className="text-gray-300 hover:text-gray-400 duration-200"
@@ -91,23 +118,21 @@ export default function ModalListUpdateProducts() {
               <div className=" h-[40%] w-[100%] bg-yellow-50 flex justify-center ">
                   <img src={UpdateBackground} className="w-[40%] h-full" />
               </div>
-                    <table  className=" text-white mt-1 py-5 px-4 flex flex-wrap justify-between  mt-0 ">
+                    <div  className=" text-white mt-1 py-5 flex flex-wrap justify-between  mt-0 ">
 
-                        <thead className=" w-full  ">
-                        <tr className="justify-between flex bg-slate-400 px-4">
-                            <th>Nombre del producto</th>
-                            <th> Precio del producto</th>
-                            <th>Cantidad del producto</th>
-                            <th>Opciones del producto</th>
-                        </tr>
+                        <div className="justify-between flex bg-slate-400 px-4 w-full">
+                            <p className="w-[25%] text-center">Nombre del producto</p>
+                            <p className="w-[25%] text-center"> Precio del producto</p>
+                            <p className="w-[25%] text-center">Cantidad del producto</p>
+                            <p className="w-[25%] text-center">Opciones del producto</p>
+                        </div>
 
-                        </thead>
-                        <tbody className=" w-full  px-4">
+                        <tbody className=" w-full  ">
                         {ListOfProducts}
                         </tbody>
 
 
-                    </table>
+                    </div>
     
 
 

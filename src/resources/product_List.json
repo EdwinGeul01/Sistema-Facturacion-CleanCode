@@ -2,15 +2,27 @@
 
 {
     "ID":1,
-    "nombreProducto":"111111",
+    "nombreProducto":"Paquete de Carne de Res",
     "PrecioProducto":400,
     "CantidadDisponible":10
 },
 {
     "ID":2,
-    "nombreProducto":"222222",
-    "PrecioProducto":800,
-    "CantidadDisponible":102
+    "nombreProducto":"Churros",
+    "PrecioProducto":30,
+    "CantidadDisponible":100
+},
+{
+    "ID":3,
+    "nombreProducto":"Manzanas",
+    "PrecioProducto":5,
+    "CantidadDisponible":500
+},
+{
+    "ID":4,
+    "nombreProducto":"Pepsi",
+    "PrecioProducto":40,
+    "CantidadDisponible":200
 }
 
 ]
