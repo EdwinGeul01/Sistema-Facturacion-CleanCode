@@ -8,6 +8,13 @@ import RecordSaleButton from "../components/Buttons/RecordSaleButton";
 import SalesRecordButton from "../components/Buttons/SalesHistoryButton";
 
 
+
+
+
+
+
+
+
 export default function SalePage() {
   interface IProduct {
     name?: string;

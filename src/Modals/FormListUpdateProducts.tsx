@@ -6,8 +6,6 @@ import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import {ChangeEvent} from 'react'
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
-import CancelIcon from '@mui/icons-material/Cancel';
-import { IconButton } from '@mui/material';
 
 
 import UpdateBackground from "../resources/Product_Update.png"; 
@@ -127,9 +125,9 @@ export default function ModalListUpdateProducts() {
                             <p className="w-[25%] text-center">Opciones del producto</p>
                         </div>
 
-                        <tbody className=" w-full  ">
+                        <div className=" w-full  ">
                         {ListOfProducts}
-                        </tbody>
+                        </div>
 
 
                     </div>
