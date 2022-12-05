@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import Data from '../resources/product_List.json'
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import {ChangeEvent} from 'react'
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
 
@@ -12,15 +11,14 @@ import UpdateBackground from "../resources/Product_Update.png";
 import { useNavigate } from "react-router-dom";
 
 
+
+import { IProductUpdate } from "../Logics/Interfaces/IproductUpdate";
+
+import UpdateCard from "../components/Cards/UpdateCard";
+
+
 export default function ModalListUpdateProducts() {
     
-    interface IProduct
-    {
-        ID: number;
-        nombreProducto: string;
-        PrecioProducto: number;
-        CantidadDisponible: number;
-    }
 
 
 
@@ -28,70 +26,31 @@ export default function ModalListUpdateProducts() {
     const RedirectToUrl  = useNavigate(); 
 
     const [Success, setSuccess] = useState(false)
-    const [Error, setError] = useState(false)
 
 
 
-    function UpdateValues(productToUpdate:IProduct)
+    function UpdateValues(productToUpdate:IProductUpdate)
     {
-        Data.map((p) =>
-        {
+
+        Data.forEach(p => {
+
             if(p.ID == productToUpdate.ID)
             {
                 p.PrecioProducto = productToUpdate.PrecioProducto;
                 p.CantidadDisponible = productToUpdate.CantidadDisponible;
             }
 
-
-        })
+            
+        });
 
 
     }
 
-    const ListOfProducts = Data.map((i)=>
+    const ListOfProducts = Data.map((product)=>
     {
-
-    const [ProducToUpdate, setProductToUpdate] = useState<IProduct>(i);
-
-    const HandleChanges =(event:ChangeEvent<HTMLInputElement>)=>
-    {
-    setProductToUpdate({...ProducToUpdate,
-        [event.target.name] : event.target.value})
-    }
-
-
-
-    const UpdateProduct = () =>{
-
-        UpdateValues(ProducToUpdate);
-        setSuccess(true);
-        setTimeout(()=>{
-            setSuccess(false);
-        },1500);
-
-
-    }
-
-    return(
-        <div  key={ProducToUpdate.ID} className="DivItemNotSelect w-full flex flex-nowrap px-4">
-           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto ">
-            <p>{ProducToUpdate.nombreProducto}</p>
-           </div>
-           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
-            <input type="number" value={ProducToUpdate.PrecioProducto} className=" text-center bg-transparent border-b outline-none" name="PrecioProducto" onChange={(e)=>{HandleChanges(e)}}/>
-           </div>
-           <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
-           <input type="number"  value={ProducToUpdate.CantidadDisponible} className=" text-center bg-transparent border-b outline-none" name="CantidadDisponible" onChange={(e)=>{HandleChanges(e)}}/>
-           </div>
-
-           <div className="w-[25%]  text-center flex justify-center items-center overflow-auto">
-            <button className="border border-yellow-400 text-yellow-400 p-2 px-4 rounded-md hover:bg-yellow-500 hover:text-white duration-500" onClick={()=>{UpdateProduct()}}>Editar Producto</button>
-           </div>
-
-
-        </div>
-    
-    )
+        return(
+            <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.ID} />
+        )
 
     })
   
@@ -138,9 +97,6 @@ export default function ModalListUpdateProducts() {
             <div className="absolute bottom-5 right-0">
             <Collapse in={Success}>
             <Alert severity="success" >Actualizacion realizada exitosamente !</Alert>
-            </Collapse>
-            <Collapse in={Error}>
-            <Alert severity="error">Hubo un problema al actualizar los datos !</Alert>
             </Collapse>
             </div>
 

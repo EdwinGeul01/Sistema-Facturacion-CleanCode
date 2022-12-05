@@ -1,6 +1,4 @@
-import React from "react";
-import SalesData from "../../resources/Sales_record.json";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 export default function SalesHistoryButton() {

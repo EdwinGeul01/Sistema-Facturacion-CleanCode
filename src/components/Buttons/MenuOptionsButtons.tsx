@@ -2,11 +2,8 @@ import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
-import Data from "../../resources/product_List.json";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Route,Routes } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 
 
 import MenuButtonsRoutes from "../../Routes/MenuButtonsRoutes";

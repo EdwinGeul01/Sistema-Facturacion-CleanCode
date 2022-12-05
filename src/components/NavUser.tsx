@@ -10,7 +10,7 @@ export default function NavUser() {
   let RedirectToURL = useNavigate();
   
   return (
-    <div className='h-[8vh] bg-white w-[100]  flex justify-center items-center '>
+    <div className='h-[8vh] bg-white w-[100]  flex justify-center items-center shadow-xl'>
 
 
       <div className='w-[80%] flex flex-row items-center'>

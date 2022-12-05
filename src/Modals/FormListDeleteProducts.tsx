@@ -24,7 +24,6 @@ export default function FormListDeleteProducts() {
   const RedirectToUrl = useNavigate();
 
   const [Success, setSuccess] = useState(false);
-  const [Error, setError] = useState(false);
 
   function UpdateValues(productToUpdate: IProduct) 
 {
@@ -95,12 +94,10 @@ export default function FormListDeleteProducts() {
                   Actualizacion realizada exitosamente !
                 </Alert>
               </Collapse>
-              <Collapse in={Error}>
-                <Alert severity="error">
-                  Hubo un problema al actualizar los datos !
-                </Alert>
-              </Collapse>
             </div>
+
+
+            
           </div>
         </Box>
       </Modal>

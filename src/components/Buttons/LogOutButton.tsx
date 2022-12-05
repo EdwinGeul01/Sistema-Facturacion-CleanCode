@@ -1,7 +1,6 @@
 
-import React from 'react'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LogOutButton() {

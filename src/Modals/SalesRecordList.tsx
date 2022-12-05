@@ -2,30 +2,24 @@
 import React from 'react'
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import SalesData from "../resources/Sales_record.json";
 
-interface ISalesRecordList
-{
-    RedirectToURL?   :   NavigateFunction;
-    
-}
 
 
 
 
-export default function SalesRecordList(props:ISalesRecordList) {
+export default function SalesRecordList() {
 
-    let {RedirectToURL} = props;
-    RedirectToURL = useNavigate();
+    let RedirectToURL = useNavigate();
     
     let SalesDataShow = SalesData.map((sale:any, index:number)=>
     {
         if(index != 0)
         {
             return(
-                <div className=' bg-slate-400 text-white justify-around flex w-full h-[4vh]  border-b-2'>
+                <div className=' bg-slate-400 text-white justify-around flex w-full h-[4vh]  border-b-2' key={index}>
                 <div className='w-[33%] flex justify-center items-center '>
                     <p>{sale.VentaID}</p>
                 </div>

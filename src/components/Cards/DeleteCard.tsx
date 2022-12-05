@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, ChangeEvent } from "react";
 
 export default function DeleteCard(props:{UpdateValues(ProducToUpdate:any):any,setSuccess(state:any):any, product:any }) {

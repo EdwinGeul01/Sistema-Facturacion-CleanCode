@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import {useState, ChangeEvent} from 'react'
 import Data from '../resources/product_List.json'
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
 import CarritoBackground from '../resources/background_Carrito.png'
@@ -14,7 +14,6 @@ export default function FormAddProduct( ) {
 
 
   const [Success, setSuccess] = useState(false)
-  const [Error, setError] = useState(false)
 
 
 
@@ -98,9 +97,6 @@ export default function FormAddProduct( ) {
             <div className="absolute bottom-5 right-0">
             <Collapse in={Success}>
             <Alert severity="success" >Producto Agregado exitosamente !</Alert>
-            </Collapse>
-            <Collapse in={Error}>
-            <Alert severity="error">Hubo un problema al Agregar el producto !</Alert>
             </Collapse>
             </div>
 
