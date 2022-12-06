@@ -8,6 +8,8 @@ import SaleHooks from '../Logics/SaleHooks';
 import { IDataJson, IProduct } from '../Logics/Interfaces/SalesInterfaces';
 import Data from "../resources/product_List.json";
 
+import { ReactElement } from 'react';
+
 describe('SALES TEST', () => {
 
  let variableshooks = renderHook(()=>SaleHooks());
@@ -101,3 +103,42 @@ describe('SALES CALCULATETOTALTOPAY',()=>{
 })
 
 
+describe('SALES UpdateDisplayedProducts ',()=>{
+
+   let variableshooks = renderHook(()=>SaleHooks());
+
+   const DataToProducts = Data.map((product)=>(
+     {
+        name : product.nombreProducto,
+        Quantity: 10,
+        Price :product.PrecioProducto,
+        MaxQuantity: product.CantidadDisponible
+     }
+   ));
+  
+  act(()=>{
+       variableshooks.result.current.setproducs(DataToProducts);
+  })
+  
+
+
+   let SaleLogic:SalesLogic = new SalesLogic(variableshooks.result.current);
+
+
+
+   let totaltopay = SaleLogic.UpdateDisplayedProducts(SaleLogic.setShowProductList);
+
+
+   test("Verify return a jsx to UPdateDisplayProducts " ,  ()=>
+   {  
+         
+      SaleLogic.UpdateDisplayedProducts(SaleLogic.setShowProductList);
+
+   
+       expect(SaleLogic.ShowProductList).toBeDefined();
+      
+   
+   })  
+
+
+})
