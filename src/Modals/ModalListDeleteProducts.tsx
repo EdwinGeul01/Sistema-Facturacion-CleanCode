@@ -1,19 +1,19 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import Data from "../resources/product_List.json";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
-import { ChangeEvent } from "react";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse/Collapse";
-import React from "react";
 
-import UpdateBackground from "../resources/Product_Update.png";
+import DeleteBackground from "../resources/Product_Delete.png";
 import { useNavigate } from "react-router-dom";
 import DeleteCard from "../components/Cards/DeleteCard";
+import { ProducstData } from "../Logics/DataManage";
 
 
-export default function FormListDeleteProducts() {
+export default function ModalListDeleteProducts() {
+
+  let products = ProducstData.chargeData();
   interface IProduct {
     ID: number;
     nombreProducto: string;
@@ -27,14 +27,14 @@ export default function FormListDeleteProducts() {
 
   function UpdateValues(productToUpdate: IProduct) 
 {
-    for (let index = 0; index < Data.length; index++) {
+    for (let index = 0; index < products.length; index++) {
 
-        if(Data[index] != undefined)
+        if(products[index] != undefined)
         {
-            if(Data[index].ID === productToUpdate.ID)
+            if(products[index].ID === productToUpdate.ID)
             {
-                console.log("product to eliminate id " + productToUpdate.ID + " --- " + Data[index].ID);
-                delete Data[index];
+                console.log("product to eliminate id " + productToUpdate.ID + " --- " + products[index].ID);
+                ProducstData.DeleteValues(index);
                 break;
             }
             
@@ -45,9 +45,9 @@ export default function FormListDeleteProducts() {
 
 }
 
-  const ListOfProducts = Data.map((i) => {
+  const ListOfProducts = products.map((product) => {
         return(
-                <DeleteCard key={i.ID} product={i} UpdateValues={UpdateValues} setSuccess={setSuccess} />
+                <DeleteCard key={product.ID} product={product} UpdateValues={UpdateValues} setSuccess={setSuccess} />
             )
   });
 
@@ -74,8 +74,8 @@ export default function FormListDeleteProducts() {
               </button>
             </div>
 
-            <div className=" h-[40%] w-[100%] bg-yellow-50 flex justify-center ">
-              <img src={UpdateBackground} className="w-[40%] h-full" />
+            <div className=" h-[40%] w-[100%] bg-red-50 flex justify-center ">
+              <img src={DeleteBackground} className="w-[40%] h-full" />
             </div>
             <div className=" text-white py-5 flex flex-wrap justify-between  mt-0 ">
               <div className="justify-between flex bg-slate-400 px-4 w-full">

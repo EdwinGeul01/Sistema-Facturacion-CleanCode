@@ -1,5 +1,5 @@
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
-import { useState, ChangeEvent , useCallback } from "react";
+import { ChangeEvent  } from "react";
 import Data from "../resources/product_List.json";
 import SalesRoutes from "../Routes/SalesRoutes";
 
@@ -8,7 +8,7 @@ import SalesRecordButton from "../components/Buttons/SalesHistoryButton";
 
 
 import { SalesLogic } from "../Logics/SaleLogic";
-import {IDataJson, IProduct,RenderVariables} from '../Logics/Interfaces/SalesInterfaces';
+import {IDataJson,RenderVariables} from '../Logics/Interfaces/SalesInterfaces';
 import SaleHooks from "../Logics/SaleHooks";
 
 
@@ -119,7 +119,7 @@ export default function SalePage() {
           <button
             className="flex borde border-transparent ml-4 p-2 px-4 rounded-md text-white bg-teal-700 hover:bg-teal-500 duration-300"
             onClick={(e) => {
-              SalesFunctions.AddProductToList(e);
+              SalesFunctions.AddProductToList();
             }}
           >
             Agregar
@@ -160,6 +160,7 @@ export default function SalePage() {
         </div>
         <RecordSaleButton
           totalSale={TotalPay}
+          products={products}
           setproducts_={(e: any) => {
             setproducs(e);
           }}

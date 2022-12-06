@@ -1,10 +1,9 @@
 
 import React from 'react'
 import { Route , Routes } from 'react-router-dom'
-import FormAddProduct from '../Modals/FormAddProduct'
-import FormListDeleteProducts from '../Modals/FormListDeleteProducts'
-import ModalListUpdateProducts from '../Modals/FormListUpdateProducts'
-
+import ModalListDeleteProducts from '../Modals/ModalListDeleteProducts'
+import ModalListUpdateProducts from '../Modals/ModalListUpdateProducts'
+import ModalAdd from '../Modals/ModalAdd'
 
 
 export default function MenuButtonsRoutes() {
@@ -13,9 +12,9 @@ export default function MenuButtonsRoutes() {
     
     <Routes location={location}>
 
-    <Route path='add' element={ <FormAddProduct/> } />
+    <Route path='add' element={ <ModalAdd/> } />
     <Route path='update' element={ <ModalListUpdateProducts />  } />
-    <Route path='delete' element={ <FormListDeleteProducts />  } />
+    <Route path='delete' element={ <ModalListDeleteProducts />  } />
 
 
     </Routes>

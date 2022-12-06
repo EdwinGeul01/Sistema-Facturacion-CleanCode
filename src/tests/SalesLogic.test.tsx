@@ -142,3 +142,45 @@ describe('SALES UpdateDisplayedProducts ',()=>{
 
 
 })
+
+
+
+describe('SALES AddProductToList  ',()=>{
+
+   let variableshooks = renderHook(()=>SaleHooks());
+
+   const DataToProducts = Data.map((product)=>(
+     {
+        name : product.nombreProducto,
+        Quantity: 10,
+        Price :product.PrecioProducto,
+        MaxQuantity: product.CantidadDisponible
+     }
+   ));
+  
+   
+
+  act(()=>{
+       variableshooks.result.current.setproducs(DataToProducts);
+      
+   })
+  
+
+
+   let SaleLogic:SalesLogic = new SalesLogic(variableshooks.result.current);
+
+
+   SaleLogic.ProducSelectedtValue = SaleLogic.products[0];
+   SaleLogic.AddProductToList();
+   let productslenght:number = SaleLogic.products.length;
+
+
+
+   test("Verify new product add to products " ,  ()=>
+   {  
+      expect(SaleLogic.products[productslenght-1]).toBe(SaleLogic.products[0]);
+   
+   })  
+
+
+})

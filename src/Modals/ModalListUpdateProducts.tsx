@@ -1,7 +1,6 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import Data from '../resources/product_List.json'
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
@@ -15,12 +14,13 @@ import { useNavigate } from "react-router-dom";
 import { IProductUpdate } from "../Logics/Interfaces/IproductUpdate";
 
 import UpdateCard from "../components/Cards/UpdateCard";
+import { ProducstData } from "../Logics/DataManage";
 
 
 export default function ModalListUpdateProducts() {
     
 
-
+    let products = ProducstData.chargeData();
 
 
     const RedirectToUrl  = useNavigate(); 
@@ -32,12 +32,11 @@ export default function ModalListUpdateProducts() {
     function UpdateValues(productToUpdate:IProductUpdate)
     {
 
-        Data.forEach(p => {
+        products.forEach(p => {
 
             if(p.ID == productToUpdate.ID)
             {
-                p.PrecioProducto = productToUpdate.PrecioProducto;
-                p.CantidadDisponible = productToUpdate.CantidadDisponible;
+                ProducstData.UpdateValues(p,productToUpdate.PrecioProducto , productToUpdate.CantidadDisponible);
             }
 
             
@@ -46,7 +45,7 @@ export default function ModalListUpdateProducts() {
 
     }
 
-    const ListOfProducts = Data.map((product)=>
+    const ListOfProducts = products.map((product)=>
     {
         return(
             <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.ID} />
@@ -75,7 +74,7 @@ export default function ModalListUpdateProducts() {
               <div className=" h-[40%] w-[100%] bg-yellow-50 flex justify-center ">
                   <img src={UpdateBackground} className="w-[40%] h-full" />
               </div>
-                    <div  className=" text-white mt-1 py-5 flex flex-wrap justify-between  mt-0 ">
+                    <div  className=" text-white  py-5 flex flex-wrap justify-between  mt-0 ">
 
                         <div className="justify-between flex bg-slate-400 px-4 w-full">
                             <p className="w-[25%] text-center">Nombre del producto</p>

@@ -1,5 +1,4 @@
-import { useState, ChangeEvent , useCallback } from "react";
-import React from 'react'
+import { useState } from "react";
 import { IProduct} from '../Logics/Interfaces/SalesInterfaces';
 
 export default function SaleHooks() {

@@ -1,9 +1,12 @@
 import React from "react";
 import SalesData from "../../resources/Sales_record.json";
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "../../Logics/Interfaces/SalesInterfaces";
+import { ProducstData } from "../../Logics/DataManage";
 
 export default function RecordSaleButton(props: {
   totalSale: number;
+  products:IProduct[];
   setproducts_: any;
 }) {
 
@@ -15,6 +18,12 @@ const RedirectToURL = useNavigate();
     let Today = new Date();
 
     let now = Today.toLocaleDateString('la');
+
+
+    
+    for (const product of props.products) {
+      ProducstData.ReduceQuantityProduct(product);
+    }
 
 
     SalesData.push({

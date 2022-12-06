@@ -3,23 +3,67 @@ import PersonIcon from "@mui/icons-material/Person";
 import { motion } from "framer-motion";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import {useNavigate} from "react-router-dom"
+import {ChangeEvent} from 'react'
+import Alert from '@mui/material/Alert';
+import Collapse from "@mui/material/Collapse/Collapse";
 
-
+import DataUsers from '../../resources/UserInformation.json'
+import { r } from "vitest/dist/index-9f5bc072";
 
 
 
 export default function LoginForm() {
 
     const redirectToURL = useNavigate();
-    const [isLoading, setchar] = useState<boolean>(false)
+    const [WrongAccess, setIsWrogAnswer] = useState<boolean>(false)
+    
+    const [RenderVariables, setnewValuesToRenderVariables] = useState(
+      {
+        user:"",
+        pass:""
+      }
+    );
 
+  function verifydata() {
+    
+    for (const User of DataUsers) {
+      
+      if(User.user == RenderVariables.user && User.pass == RenderVariables.pass)
+      {
+        redirectToURL('/home');
+      }
 
-  function verifydata(e: React.SyntheticEvent) {
-    setchar(!isLoading);
-    console.log(isLoading);
-    redirectToURL('/home');
-    e.preventDefault();
+    }
+
+    return true;
   }
+
+
+  function TryLogin(e: React.SyntheticEvent)
+  {
+
+    setIsWrogAnswer(verifydata());
+
+    setTimeout(() => {
+      setIsWrogAnswer(false);
+    }, 1500);
+
+    e.preventDefault();
+
+  }
+
+  function handlerRenderVariablesChanges(event:ChangeEvent<HTMLInputElement>)
+  {
+
+      setnewValuesToRenderVariables(
+        {
+          ...RenderVariables,
+          [event.target.name]:event.target.value
+        }
+      )
+
+  }
+
 
   return (
     <div
@@ -31,13 +75,10 @@ export default function LoginForm() {
                 shadow-cyan-600
                 shadow-lg "
     >
-      <form onSubmit={verifydata} method="post" 
-      className={(isLoading)?"hidden":"h-full"}
+      <form onSubmit={TryLogin} method="post" 
+      className="h-full"
       >
-        <div className={
-            (isLoading)? "bg-red-50 h-[100px] w-[100px]": ""}>
 
-        </div>
         <div
           className="flex flex-col
                         h-full 
@@ -64,6 +105,9 @@ export default function LoginForm() {
             px-4
             text-slate-700"
             placeholder="Username"
+            name="user"
+            value={RenderVariables.user}
+            onChange={(e)=>{handlerRenderVariablesChanges(e)}}
           />
           <input
             type="password"
@@ -77,6 +121,10 @@ export default function LoginForm() {
             outline-none
             text-slate-700"
             placeholder="Password"
+            value={RenderVariables.pass}
+            name="pass"
+            onChange={(e)=>{handlerRenderVariablesChanges(e)}}
+
           />
 
           <button
@@ -96,35 +144,12 @@ export default function LoginForm() {
         </div>
       </form>
 
-      <div
-          className={(isLoading)?
-            "text-slate-500 h-full flex flex-col justify-center items-center"
-            :"hidden"}
-      >
-        
-        <motion.div
-        
-        animate={{
-            rotate:360
-        }}
-        transition={{
-            duration:2,
-            delay:0,
-            repeat:Infinity
-        }}
-        >
-             <AutorenewIcon
-            sx={
-                {
-                    width:150,
-                    height:150
-                }
-            }
-            />
-        </motion.div>
-       
-        Cargando ...
-        </div>      
+      <div className="absolute bottom-5 left-0">
+            <Collapse in={WrongAccess}>
+            <Alert severity="error" >Las credenciales Ingresadas son incorrectas  !</Alert>
+            </Collapse>
+      </div>
+
 
     </div>
   );

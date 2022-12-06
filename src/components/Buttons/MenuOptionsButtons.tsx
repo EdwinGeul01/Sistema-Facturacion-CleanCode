@@ -3,7 +3,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import {  useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 import MenuButtonsRoutes from "../../Routes/MenuButtonsRoutes";
@@ -14,7 +14,6 @@ import MenuButtonsRoutes from "../../Routes/MenuButtonsRoutes";
 export default function AdminMenuOptionsButtons() {
   
 
-  const location = useLocation();
   const redirectToUrl = useNavigate();
 
 

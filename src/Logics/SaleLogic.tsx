@@ -3,10 +3,7 @@ import ProductListCard from '../components/Cards/ProductListCard';
 import Data from "../resources/product_List.json";
 
 
-
 import React from 'react'
-
-
 
 class SalesLogic  implements SalesFunctions  {
   
@@ -63,8 +60,7 @@ class SalesLogic  implements SalesFunctions  {
   }
 
   
-  AddProductToList = (event: any) =>{
-    console.log("asdasd");
+  AddProductToList = () =>{
 
     if (this.ProducSelectedtValue.name != "") {
       this.products.push(this.ProducSelectedtValue);
@@ -79,15 +75,18 @@ class SalesLogic  implements SalesFunctions  {
   ChargeProductData = (productName: string)=>{
     
     let DataJSON = null;
-    for (let index = 0; index < Data.length; index++) {
-      if(Data[index] != undefined)
+    for (const product of Data) {
+
+      if(product != undefined)
       {
-        if (Data[index].nombreProducto == productName) {
-          DataJSON = Data[index];
+        if (product.nombreProducto == productName) {
+          DataJSON = product;
           break;
         }
-      }
+      }  
+
     }
+
     return DataJSON;
 
 
