@@ -3,32 +3,24 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import {  useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 import MenuButtonsRoutes from "../../Routes/MenuButtonsRoutes";
 
-
-
-
 export default function AdminMenuOptionsButtons() {
-  
-
   const redirectToUrl = useNavigate();
 
 
+
   return (
-    <div 
-    className="w-full h-full flex justify-around items-center
+    <div
+      className="w-full h-full flex justify-around items-center
               flex-col sm:flex-row"
-
     >
-    
-
       <button
         className="btn-menu"
         onClick={() => {
-            redirectToUrl('sale');
+          redirectToUrl("sale");
         }}
       >
         <ShoppingBagIcon
@@ -44,7 +36,7 @@ export default function AdminMenuOptionsButtons() {
       <button
         className="btn-menu"
         onClick={() => {
-          redirectToUrl('add');
+          redirectToUrl("add");
         }}
       >
         <ShoppingCartIcon
@@ -60,7 +52,7 @@ export default function AdminMenuOptionsButtons() {
       <button
         className="btn-menu"
         onClick={() => {
-          redirectToUrl('update');
+          redirectToUrl("update");
         }}
       >
         <SystemUpdateAltIcon
@@ -76,7 +68,7 @@ export default function AdminMenuOptionsButtons() {
       <button
         className="btn-menu"
         onClick={() => {
-          redirectToUrl('delete');
+          redirectToUrl("delete");
         }}
       >
         <DeleteIcon
@@ -89,14 +81,7 @@ export default function AdminMenuOptionsButtons() {
         <p className="font-medium text-slate-400">Eliminar Productos</p>
       </button>
 
-
-
-
-        <MenuButtonsRoutes/>
-
-
-      
-
+      <MenuButtonsRoutes />
     </div>
   );
 }

@@ -1,17 +1,12 @@
 import { useState, ChangeEvent } from "react";
-
-export default function DeleteCard(props:{UpdateValues(ProducToUpdate:any):any,setSuccess(state:any):any, product:any }) {
-    
-    
-    interface IProduct {
-        ID: number;
-        nombreProducto: string;
-        PrecioProducto: number;
-        CantidadDisponible: number;
-      }
+import {IProductUpdate} from '../../Logics/Interfaces/IproductUpdate';
 
 
-    const [ProducToUpdate, setProductToUpdate] = useState<IProduct>(props.product);
+export default function DeleteCard(props:{DeleteProduct(ProducToUpdate:any):any,setSuccess(state:boolean):any, product:any }) {
+
+
+
+    const [ProducToUpdate, setProductToUpdate] = useState<IProductUpdate>(props.product);
 
 
 
@@ -23,7 +18,7 @@ export default function DeleteCard(props:{UpdateValues(ProducToUpdate:any):any,s
     };
 
     const DeleteProduct = () => {
-      props.UpdateValues(ProducToUpdate);
+      props.DeleteProduct(ProducToUpdate);
       props.setSuccess(true);
       setTimeout(() => {
         props.setSuccess(false);

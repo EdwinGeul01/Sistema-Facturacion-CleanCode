@@ -9,10 +9,7 @@ export default function LogOutButton() {
 
     function CloseSession()
     {
-
         RedirectTo('/login');
-
-
     }
 
 

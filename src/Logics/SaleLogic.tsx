@@ -7,14 +7,14 @@ import React from 'react'
 
 class SalesLogic  implements SalesFunctions  {
   
-  products:any;
-  setproducs:any;
-  ShowProductList:any; 
-  setShowProductList:any;
-  ProducSelectedtValue: any; 
-  setProducSelectedtValue: any;
+  products:IProduct[];
+  setproducs:React.Dispatch<React.SetStateAction<any>>;
+  ShowProductList:JSX.Element; 
+  setShowProductList:React.Dispatch<React.SetStateAction<any>>;;
+  ProducSelectedtValue: IProduct; 
+  setProducSelectedtValue: React.Dispatch<React.SetStateAction<any>>;
   TotalPay:number;
-  setTotalPay:any;
+  setTotalPay:React.Dispatch<React.SetStateAction<number>>;
   
 
 
@@ -63,12 +63,12 @@ class SalesLogic  implements SalesFunctions  {
   AddProductToList = () =>{
 
     if (this.ProducSelectedtValue.name != "") {
-      this.products.push(this.ProducSelectedtValue);
-      console.log(this.products);
-      this.UpdateDisplayedProducts(this.setShowProductList);
-      this.CalculateTotalToPay();
+     return;
     }
 
+    this.products.push(this.ProducSelectedtValue);
+    this.UpdateDisplayedProducts(this.setShowProductList);
+    this.CalculateTotalToPay();
 
   }
 
@@ -91,6 +91,9 @@ class SalesLogic  implements SalesFunctions  {
 
 
   }
+
+
+
 }
 
 export { SalesLogic };

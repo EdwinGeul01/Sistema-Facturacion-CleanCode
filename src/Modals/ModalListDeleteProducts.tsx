@@ -25,7 +25,10 @@ export default function ModalListDeleteProducts() {
 
   const [Success, setSuccess] = useState(false);
 
-  function UpdateValues(productToUpdate: IProduct) 
+
+
+
+  function DeleteProduct(productToUpdate: IProduct) 
 {
     for (let index = 0; index < products.length; index++) {
 
@@ -47,7 +50,7 @@ export default function ModalListDeleteProducts() {
 
   const ListOfProducts = products.map((product) => {
         return(
-                <DeleteCard key={product.ID} product={product} UpdateValues={UpdateValues} setSuccess={setSuccess} />
+                <DeleteCard key={product.ID} product={product} DeleteProduct={DeleteProduct} setSuccess={setSuccess} />
             )
   });
 
@@ -77,12 +80,12 @@ export default function ModalListDeleteProducts() {
             <div className=" h-[40%] w-[100%] bg-red-50 flex justify-center ">
               <img src={DeleteBackground} className="w-[40%] h-full" />
             </div>
-            <div className=" text-white py-5 flex flex-wrap justify-between  mt-0 ">
-              <div className="justify-between flex bg-slate-400 px-4 w-full">
-                <p className="w-[25%] text-center">Nombre del producto</p>
-                <p className="w-[25%] text-center"> Precio del producto</p>
-                <p className="w-[25%] text-center">Cantidad del producto</p>
-                <p className="w-[25%] text-center">Opciones del producto</p>
+            <div className=" text-white py-5 flex flex-wrap justify-between mt-0  ">
+              <div className="justify-between flex bg-slate-400 px-4 w-full [&>p]:w-[25%] [&>p]:text-center">
+                <p>Nombre del producto</p>
+                <p> Precio del producto</p>
+                <p>Cantidad del producto</p>
+                <p>Opciones del producto</p>
               </div>
 
               <div className=" w-full  ">{ListOfProducts}</div>

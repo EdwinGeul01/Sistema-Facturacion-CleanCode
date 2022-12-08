@@ -4,7 +4,12 @@ import { IDataJson, IProduct } from './Interfaces/SalesInterfaces';
 
 class ProducstData 
 {
+    static DataCopy:IDataJson[] = structuredClone(Data);
 
+    constructor()
+    {
+
+    }
 
     static chargeData()
     {
@@ -51,6 +56,38 @@ class ProducstData
         }
 
     }
+
+
+    static VerifyIsCorrectQuantity(product:IProduct)
+    {
+
+
+        for (const ProductData of this.DataCopy) {
+            
+            if(ProductData.nombreProducto == product.name)
+            {
+
+                let MaxQuantityExceeded = ProductData.CantidadDisponible < product.Quantity;
+                if(MaxQuantityExceeded)
+                {
+                    return false;
+                }else
+                {
+                    ProductData.CantidadDisponible -= product.Quantity;
+                }
+            }
+        }
+
+        return true;
+
+
+    }
+
+    static RestartDataCopy()
+    {
+        this.DataCopy = structuredClone(Data);
+    }
+
 
 }
 

@@ -22,23 +22,17 @@ export default function ModalListUpdateProducts() {
 
     let products = ProducstData.chargeData();
 
-
     const RedirectToUrl  = useNavigate(); 
-
     const [Success, setSuccess] = useState(false)
-
 
 
     function UpdateValues(productToUpdate:IProductUpdate)
     {
-
-        products.forEach(p => {
-
-            if(p.ID == productToUpdate.ID)
+        products.forEach(product => {
+            if(product.ID == productToUpdate.ID)
             {
-                ProducstData.UpdateValues(p,productToUpdate.PrecioProducto , productToUpdate.CantidadDisponible);
+                ProducstData.UpdateValues(product,productToUpdate.PrecioProducto , productToUpdate.CantidadDisponible);
             }
-
             
         });
 
@@ -47,9 +41,9 @@ export default function ModalListUpdateProducts() {
 
     const ListOfProducts = products.map((product)=>
     {
-        return(
-            <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.ID} />
-        )
+            return(
+                    <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.ID} />
+            )
 
     })
   

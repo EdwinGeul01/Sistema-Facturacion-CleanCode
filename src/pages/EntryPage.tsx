@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import LogoProgram from "../resources/alien.svg";
+import LogoProgram from "../resources/newlogo.png";
 import { delay, motion } from "framer-motion";
 import { useNavigate , Link as LinkReact} from "react-router-dom";
 

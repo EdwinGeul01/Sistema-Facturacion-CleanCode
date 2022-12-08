@@ -7,20 +7,40 @@ import { ProducstData } from "../../Logics/DataManage";
 export default function RecordSaleButton(props: {
   totalSale: number;
   products:IProduct[];
-  setproducts_: any;
+  SetProducts: React.Dispatch<React.SetStateAction<any>>;
 }) {
 
 const RedirectToURL = useNavigate();
 
 
+  
+
 
   function SaveSaleData() {
     let Today = new Date();
-
     let now = Today.toLocaleDateString('la');
+    let IsDataEnteredCorrect:boolean = true;
+
+    for (const product of props.products) {
+       IsDataEnteredCorrect = ProducstData.VerifyIsCorrectQuantity(product);
+       
+       if(!IsDataEnteredCorrect)
+       {
+        break;
+       }
+    }
+  
+
+    if(!IsDataEnteredCorrect)
+    {
+       ProducstData.RestartDataCopy();
+       RedirectToURL('failed');
+       return;
+    }
 
 
-    
+
+
     for (const product of props.products) {
       ProducstData.ReduceQuantityProduct(product);
     }
@@ -31,8 +51,8 @@ const RedirectToURL = useNavigate();
       Total: props.totalSale,
       Date:now
     });
-    props.setproducts_(new Array());
-    RedirectToURL('succes');
+    props.SetProducts(new Array());
+    RedirectToURL('success');
     console.log(SalesData);
   }
 

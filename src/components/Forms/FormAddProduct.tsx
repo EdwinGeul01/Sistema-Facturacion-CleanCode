@@ -7,7 +7,7 @@ import { ProducstData } from "../../Logics/DataManage";
 
 
 
-export default function FormAddProduct(props:{setSuccess:any}) {
+export default function FormAddProduct(props:{setSuccess:React.Dispatch<React.SetStateAction<boolean>>}) {
 
   let Data = ProducstData.chargeData();
   let {setSuccess} = props;

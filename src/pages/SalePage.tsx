@@ -64,12 +64,16 @@ export default function SalePage() {
     });
   }
 
-  let ProductsOption = Data.map((p) => {
-    return (
-      <option value={p.nombreProducto} key={p.ID}>
-        {p.nombreProducto}
-      </option>
-    );
+  let ProductsOption = Data.map((product) => {
+    if(product.CantidadDisponible > 0)
+    {
+      return (
+        <option value={product.nombreProducto} key={product.ID}>
+          {product.nombreProducto}
+        </option>
+      );
+
+    }
   });
 
 
@@ -94,8 +98,7 @@ export default function SalePage() {
               name="name"
             >
               <option disabled value="">
-                {" "}
-                -- select an option --{" "}
+                -- Seleccione un Producto --
               </option>
               {ProductsOption}
             </select>
@@ -161,7 +164,7 @@ export default function SalePage() {
         <RecordSaleButton
           totalSale={TotalPay}
           products={products}
-          setproducts_={(e: any) => {
+          SetProducts={(e: any) => {
             setproducs(e);
           }}
         />

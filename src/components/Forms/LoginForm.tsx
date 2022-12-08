@@ -24,15 +24,12 @@ export default function LoginForm() {
       }
     );
 
-  function verifydata() {
-    
+  function verifydata(user:string , pass:string) {
     for (const User of DataUsers) {
-      
-      if(User.user == RenderVariables.user && User.pass == RenderVariables.pass)
+      if(User.user == user && User.pass == pass)
       {
         redirectToURL('/home');
       }
-
     }
 
     return true;
@@ -41,8 +38,8 @@ export default function LoginForm() {
 
   function TryLogin(e: React.SyntheticEvent)
   {
-
-    setIsWrogAnswer(verifydata());
+    let IsCorrectCredentials:boolean = verifydata(RenderVariables.user,RenderVariables.pass);
+    setIsWrogAnswer(IsCorrectCredentials);
 
     setTimeout(() => {
       setIsWrogAnswer(false);
@@ -104,7 +101,7 @@ export default function LoginForm() {
             outline-none
             px-4
             text-slate-700"
-            placeholder="Username"
+            placeholder="Usuario"
             name="user"
             value={RenderVariables.user}
             onChange={(e)=>{handlerRenderVariablesChanges(e)}}
@@ -120,7 +117,7 @@ export default function LoginForm() {
             border-b-2
             outline-none
             text-slate-700"
-            placeholder="Password"
+            placeholder="Contraseña"
             value={RenderVariables.pass}
             name="pass"
             onChange={(e)=>{handlerRenderVariablesChanges(e)}}
@@ -139,7 +136,7 @@ export default function LoginForm() {
             hover:text-white
             duration-300"
           >
-            Login
+            Iniciar Sesión
           </button>
         </div>
       </form>

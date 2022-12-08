@@ -2,9 +2,7 @@
 type SalesFunctions = {
 
 
-    CalculateTotalToPay(
-      setTotalPay: React.Dispatch<React.SetStateAction<number>>
-    ): void;
+    CalculateTotalToPay(): void;
 
     UpdateDisplayedProducts(
         setTotalPay: React.Dispatch<React.SetStateAction<number>>
