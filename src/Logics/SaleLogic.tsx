@@ -62,14 +62,14 @@ class SalesLogic  implements SalesFunctions  {
   
   AddProductToList = () =>{
 
-    if (this.ProducSelectedtValue.name != "") {
+    if (this.ProducSelectedtValue.name == "") {
      return;
     }
 
     this.products.push(this.ProducSelectedtValue);
     this.UpdateDisplayedProducts(this.setShowProductList);
     this.CalculateTotalToPay();
-
+    console.log("llego aqui");
   }
 
   ChargeProductData = (productName: string)=>{
