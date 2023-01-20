@@ -27,16 +27,16 @@ export default function DeleteCard(props:{DeleteProduct(ProducToUpdate:any):any,
 
     return (
       <div
-        key={ProducToUpdate.ID}
+        key={ProducToUpdate.id}
         className="DivItemNotSelect w-full flex flex-nowrap px-4"
       >
         <div className="text-center w-[25%]  flex justify-center items-center overflow-auto ">
-          <p>{ProducToUpdate.nombreProducto}</p>
+          <p>{ProducToUpdate.nombre}</p>
         </div>
         <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
           <input
             type="number"
-            value={ProducToUpdate.PrecioProducto}
+            value={ProducToUpdate.precio}
             className=" text-center bg-transparent border-b outline-none"
             name="PrecioProducto"
             onChange={(e) => {
@@ -47,7 +47,7 @@ export default function DeleteCard(props:{DeleteProduct(ProducToUpdate:any):any,
         <div className="text-center w-[25%]  flex justify-center items-center overflow-auto">
           <input
             type="number"
-            value={ProducToUpdate.CantidadDisponible}
+            value={ProducToUpdate.cantidad}
             className=" text-center bg-transparent border-b outline-none"
             name="CantidadDisponible"
             onChange={(e) => {

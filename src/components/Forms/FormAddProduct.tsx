@@ -4,6 +4,8 @@ import {useState, ChangeEvent} from 'react'
 import Alert from '@mui/material/Alert';
 
 import { ProducstData } from "../../Logics/DataManage";
+import ManageConnections from "../../Connections/ManageConnections";
+
 
 
 
@@ -34,8 +36,8 @@ export default function FormAddProduct(props:{setSuccess:React.Dispatch<React.Se
         "CantidadDisponible":ValuesForm.ProductQuantity
       }
     
-    ProducstData.AddProduct(newProduct);
-
+    // ProducstData.AddProduct(newProduct); // no sqlversion
+    ManageConnections.addproduct(ValuesForm.ProductName, ValuesForm.ProductQuantity,ValuesForm.ProduyctPrice);
     setSuccess(true);
       event.preventDefault();
 

@@ -4,6 +4,16 @@ import LoginForm from '../components/Forms/LoginForm'
 import { motion } from 'framer-motion'
 
 export default function Login() {
+
+
+
+
+
+
+
+
+
+
   return (
     <motion.div 
     initial={{opacity:0}}
@@ -13,6 +23,7 @@ export default function Login() {
     className='flex text-white h-[100vh] justify-center items-center'>
 
         <LoginForm/>
+
 
 
     </motion.div>

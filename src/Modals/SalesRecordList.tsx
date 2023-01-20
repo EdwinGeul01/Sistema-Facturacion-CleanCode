@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import { useNavigate } from 'react-router-dom';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import SalesData from "../resources/Sales_record.json";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import ManageConnections from '../Connections/ManageConnections';
 
 
 
@@ -13,30 +16,43 @@ import SalesData from "../resources/Sales_record.json";
 export default function SalesRecordList() {
 
     let RedirectToURL = useNavigate();
+    const [SalesDataShow, setSalesDataShow] = useState([]);
     
-    let SalesDataShow = SalesData.map((sale:any, index:number)=>
-    {
-        if(index != 0)
-        {
-            return(
-                <div className=' bg-slate-400 text-white justify-around flex w-full h-[4vh]  border-b-2' key={index}>
-                <div className='w-[33%] flex justify-center items-center '>
-                    <p>{sale.VentaID}</p>
-                </div>
-                <div className='w-[33%] flex justify-center items-center '>
-                    <p> {sale.Date}</p>
-                </div>
-                <div className='w-[33%] flex justify-center items-center '>
-                    <p>  {sale.Total} </p>
-                </div>
-            </div>
-            )
+    useEffect(() => {
+        const execute = async ()=>{
+            
+            const response = await ManageConnections.getsellHistory();
+
+            const data = await response.map((d,index)=>{
+                return(
+
+                    <div className=' bg-slate-400 text-white justify-around flex w-full sticky top-0 mt-1' key={index}>
+                    <div className='w-[33%] flex justify-center'>
+                        <p>{d.id}</p>
+                    </div>
+                    <div className='w-[33%] flex justify-center'>
+                        <p>{d.fecha}</p>
+                    </div>
+                    <div className='w-[33%] flex justify-center'>
+                        <p>{d.total}</p>
+                    </div>
+                    </div>
+
+                )
+
+            });
+
+
+            setSalesDataShow([...SalesDataShow , data]);
+
+
+
         }
 
+        execute();
 
-
-    })
-  
+    }, [])
+    
     return (
     <Modal 
     open={true}
@@ -65,6 +81,7 @@ export default function SalesRecordList() {
                             </div>
                         </div>
                         <div>
+                            
                             {SalesDataShow}
                         </div>
 

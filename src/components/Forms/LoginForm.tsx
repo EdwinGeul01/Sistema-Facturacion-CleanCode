@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import { motion } from "framer-motion";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -7,16 +7,20 @@ import {ChangeEvent} from 'react'
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
 
-import DataUsers from '../../resources/UserInformation.json'
+// import DataUsers from '../../resources/UserInformation.json'
 import { r } from "vitest/dist/index-9f5bc072";
+import ManageConnections from "../../Connections/ManageConnections";
+
+
 
 
 
 export default function LoginForm() {
 
+    const [DataUsers, setDataUsers] = useState({})  ;
     const redirectToURL = useNavigate();
     const [WrongAccess, setIsWrogAnswer] = useState<boolean>(false)
-    
+    let tempasod;
     const [RenderVariables, setnewValuesToRenderVariables] = useState(
       {
         user:"",
@@ -31,14 +35,13 @@ export default function LoginForm() {
         redirectToURL('/home');
       }
     }
-
     return true;
   }
 
 
   function TryLogin(e: React.SyntheticEvent)
   {
-    let IsCorrectCredentials:boolean = verifydata(RenderVariables.user,RenderVariables.pass);
+    let IsCorrectCredentials:boolean =  verifydata(RenderVariables.user,RenderVariables.pass);
     setIsWrogAnswer(IsCorrectCredentials);
 
 
@@ -63,6 +66,23 @@ export default function LoginForm() {
       )
 
   }
+
+
+
+
+
+  useEffect(() => {
+
+    async function execute(){
+
+      const data = await ManageConnections.getusers();
+      await setDataUsers(data);
+       console.log(DataUsers);
+    }
+
+    execute();
+
+  }, [])
 
 
   return (

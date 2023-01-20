@@ -1,6 +1,6 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse/Collapse";
@@ -9,6 +9,7 @@ import DeleteBackground from "../resources/Product_Delete.png";
 import { useNavigate } from "react-router-dom";
 import DeleteCard from "../components/Cards/DeleteCard";
 import { ProducstData } from "../Logics/DataManage";
+import ManageConnections from "../Connections/ManageConnections";
 
 
 export default function ModalListDeleteProducts() {
@@ -26,33 +27,59 @@ export default function ModalListDeleteProducts() {
   const [Success, setSuccess] = useState(false);
 
 
+  let productsdb:any = [];
+  const [Productlist, setProductlist] = useState([]);
 
 
-  function DeleteProduct(productToUpdate: IProduct) 
+
+function DeleteProduct(productToDelete:any) 
 {
-    for (let index = 0; index < products.length; index++) {
+  const execute =  async () => {
+   await ManageConnections.deleteproduct(productToDelete.id);
+    productsdb =  await ManageConnections.getproduct();
+    const datalist = await productsdb.map((product)=>
+    {
+      return(
+        <DeleteCard key={product.id} product={product} DeleteProduct={DeleteProduct} setSuccess={setSuccess} />
+      )
+    })
 
-        if(products[index] != undefined)
-        {
-            if(products[index].ID === productToUpdate.ID)
-            {
-                console.log("product to eliminate id " + productToUpdate.ID + " --- " + products[index].ID);
-                ProducstData.DeleteValues(index);
-                break;
-            }
-            
-        }
-    }
+    console.log("en el datalist existe : " ,  datalist);
     
+    
+    setProductlist(datalist);
+  };
+  execute();
+
+};
 
 
+
+
+useEffect(() => {
+
+  const execute =  async () => {
+    productsdb = await ManageConnections.getproduct()
+    setdataList();
+};
+
+execute();
+
+}, []);
+
+ function setdataList()
+{
+    const datalist =  productsdb.map((product)=>
+    {
+      return(
+        <DeleteCard key={product.id} product={product} DeleteProduct={DeleteProduct} setSuccess={setSuccess} />
+      )
+    })
+
+    setProductlist(datalist);
+    console.log("en el datalist existe : " ,  datalist);
 }
 
-  const ListOfProducts = products.map((product) => {
-        return(
-                <DeleteCard key={product.ID} product={product} DeleteProduct={DeleteProduct} setSuccess={setSuccess} />
-            )
-  });
 
   return (
     <>
@@ -88,7 +115,7 @@ export default function ModalListDeleteProducts() {
                 <p>Opciones del producto</p>
               </div>
 
-              <div className=" w-full  ">{ListOfProducts}</div>
+              <div className=" w-full  ">{Productlist}</div>
             </div>
 
             <div className="absolute bottom-5 right-0">

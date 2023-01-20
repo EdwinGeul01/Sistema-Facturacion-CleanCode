@@ -3,57 +3,26 @@ import SalesData from "../../resources/Sales_record.json";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../Logics/Interfaces/SalesInterfaces";
 import { ProducstData } from "../../Logics/DataManage";
+import ManageConnections from "../../Connections/ManageConnections";
 
 export default function RecordSaleButton(props: {
-  totalSale: number;
-  products:IProduct[];
-  SetProducts: React.Dispatch<React.SetStateAction<any>>;
+  total:any,
+  reducefunct:any
 }) {
 
 const RedirectToURL = useNavigate();
 
-
-  
-
-
   function SaveSaleData() {
-    let Today = new Date();
-    let now = Today.toLocaleDateString('la');
-    let IsDataEnteredCorrect:boolean = true;
+    const execute = async ()=>{
 
-    for (const product of props.products) {
-       IsDataEnteredCorrect = ProducstData.VerifyIsCorrectQuantity(product);
-       
-       if(!IsDataEnteredCorrect)
-       {
-        break;
-       }
-    }
-  
+      const response = await ManageConnections.AddToSellHistory(props.total);
 
-    if(!IsDataEnteredCorrect)
-    {
-       ProducstData.RestartDataCopy();
-       RedirectToURL('failed');
-       return;
+      RedirectToURL('success');
+
     }
 
-
-
-
-    for (const product of props.products) {
-      ProducstData.ReduceQuantityProduct(product);
-    }
-
-
-    SalesData.push({
-      VentaID: SalesData.length,
-      Total: props.totalSale,
-      Date:now
-    });
-    props.SetProducts(new Array());
-    RedirectToURL('success');
-    console.log(SalesData);
+    execute();
+    props.reducefunct();
   }
 
 

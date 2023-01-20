@@ -1,6 +1,6 @@
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import Alert from '@mui/material/Alert';
 import Collapse from "@mui/material/Collapse/Collapse";
@@ -15,38 +15,53 @@ import { IProductUpdate } from "../Logics/Interfaces/IproductUpdate";
 
 import UpdateCard from "../components/Cards/UpdateCard";
 import { ProducstData } from "../Logics/DataManage";
+import ManageConnections from "../Connections/ManageConnections";
 
 
 export default function ModalListUpdateProducts() {
     
 
-    let products = ProducstData.chargeData();
-
     const RedirectToUrl  = useNavigate(); 
-    const [Success, setSuccess] = useState(false)
+    const [Success, setSuccess] = useState(false);
+    let productsdb:any = [];
+    const [Productlist, setProductlist] = useState();
+
+    
+
+     useEffect(() => {
 
 
-    function UpdateValues(productToUpdate:IProductUpdate)
-    {
-        products.forEach(product => {
-            if(product.ID == productToUpdate.ID)
+       const execute =  async () => {
+            productsdb = await  ManageConnections.getproduct()
+            console.log(productsdb);
+            setdataList();
+        };
+        
+        execute();
+
+
+    }, []);
+    
+    async function setdataList()
+        {
+            const datalist =  await productsdb.map((product)=>
             {
-                ProducstData.UpdateValues(product,productToUpdate.PrecioProducto , productToUpdate.CantidadDisponible);
-            }
-            
-        });
+                    return(
+                            <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.id} />
+                    )
+            })
+            setProductlist(datalist);
+        }
 
+    function UpdateValues(productToUpdate:any)
+    {
+        console.log(productToUpdate);
+        ManageConnections.modifyproduct(productToUpdate.id,productToUpdate.cantidad,productToUpdate.precio);
 
     }
 
-    const ListOfProducts = products.map((product)=>
-    {
-            return(
-                    <UpdateCard UpdateValues={UpdateValues} product={product} setSucces={setSuccess} key={product.ID} />
-            )
-
-    })
-  
+ 
+    
     return (
         <>
     <Modal 
@@ -78,13 +93,12 @@ export default function ModalListUpdateProducts() {
                         </div>
 
                         <div className=" w-full  ">
-                        {ListOfProducts}
+                        {Productlist}
                         </div>
 
 
                     </div>
     
-
 
 
             <div className="absolute bottom-5 right-0">
@@ -96,8 +110,6 @@ export default function ModalListUpdateProducts() {
 
                 </div>
         </Box>
-
-
 
     </Modal>
 
